@@ -56,9 +56,6 @@ Bienvenue dans notre application web de **Crowdfunding** qui permet aux utilisat
   - Contributions
 - Mapping des entités avec **JPA/Hibernate**
 
----
-
-## 🛠️ Technologies utilisées
 
 | Couche       | Technologie                         |
 |--------------|-------------------------------------|
