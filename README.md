@@ -68,5 +68,5 @@ Bienvenue dans notre application web de **Crowdfunding** qui permet aux utilisat
 ---
 ## 🖼️ Aperçu du Design
 
-![Aperçu Figma](./mockup.png)
+![Aperçu Figma](./mockup.jpg)
 
