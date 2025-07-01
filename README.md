@@ -66,3 +66,7 @@ Bienvenue dans notre application web de **Crowdfunding** qui permet aux utilisat
 | Paiement (simulé) | Stripe / PayPal (mock ou sandbox) |
 
 ---
+## 🖼️ Aperçu du Design
+
+![Aperçu Figma](./mockup.png)
+
