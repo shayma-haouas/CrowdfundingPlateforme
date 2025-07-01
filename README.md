@@ -65,10 +65,38 @@ Bienvenue dans notre application web de **Crowdfunding** qui permet aux utilisat
 | Authentification | JWT (JSON Web Token)           |
 | Paiement (simulé) | Stripe / PayPal (mock ou sandbox) |
 
+
+---
+## 📋 Product Backlog
+
+> Voici une capture d’écran de notre backlog Scrum, utilisée pendant la planification des sprints.
+
+![Product backlogg (2)](https://github.com/user-attachments/assets/23181224-ab31-4e8a-ae00-8e941223e952)
+
+---
+
+## 🧾 Diagrammes UML
+
+### 🔹 Use Case Diagram
+
+> Représentation des interactions principales entre les utilisateurs et le système.
+
+![usescase drawio](https://github.com/user-attachments/assets/ffd7e988-0fdf-44a3-8e71-1346b843fce2)
+
+
+---
+
+### 🔸 Class Diagram
+
+> Structure des entités principales de l’application.
+
+![Blank diagram (2)](https://github.com/user-attachments/assets/4428781e-ee87-49d1-8c3a-be86c00e65e4)
+
+
+---
 ---
 ## 🖼️ Aperçu du Design
 Le design de l’application a été réalisé avec **Figma**.  
 Il utilise principalement les couleurs **rouge et blanc** pour un style moderne, simple et agréable à utiliser.
 
 ![Aperçu Figma](./mockup.jpg)
-
