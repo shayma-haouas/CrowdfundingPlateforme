@@ -67,6 +67,8 @@ Bienvenue dans notre application web de **Crowdfunding** qui permet aux utilisat
 
 ---
 ## 🖼️ Aperçu du Design
+Le design de l’application a été réalisé avec **Figma**.  
+Il utilise principalement les couleurs **rouge et blanc** pour un style moderne, simple et agréable à utiliser.
 
 ![Aperçu Figma](./mockup.jpg)
 
