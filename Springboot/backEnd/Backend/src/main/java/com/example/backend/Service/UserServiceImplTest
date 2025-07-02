@@ -1,0 +1,119 @@
+package com.example.backend.Service;
+
+import com.example.backend.Entities.User;
+import com.example.backend.Repository.UserRepository;
+import com.example.backend.ServiceAPI.EmailService;
+import com.example.backend.ServiceAPI.JwtService;
+import jakarta.mail.MessagingException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.util.Optional;
+
+class UserServiceImplTest {
+
+    @Mock private UserRepository userRepository;
+    @Mock private PasswordEncoder passwordEncoder;
+    @Mock private JwtService jwtService;
+    @Mock private EmailService emailService;
+    @InjectMocks private UserServiceImpl userService;
+
+    @BeforeEach
+    void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void register_Success() throws Exception {
+        User user = new User();
+        user.setNom("John");
+        user.setPrenom("Doe");
+        user.setEmail("john@example.com");
+        user.setPassword("pass");
+        user.setRole(User.Role.USER);
+
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+        when(passwordEncoder.encode("pass")).thenReturn("encoded");
+        when(userRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+
+        User res = userService.register(user);
+
+        assertEquals("encoded", res.getPassword());
+        verify(emailService).sendVerificationEmail(res);
+    }
+
+    @Test
+    void register_EmailExists_Throws() {
+        User user = new User();
+        user.setEmail("exist@example.com");
+
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(new User()));
+
+        ResponseStatusException ex = assertThrows(ResponseStatusException.class,
+            () -> userService.register(user));
+
+        assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+    }
+
+    @Test
+    void login_Success() {
+        User user = new User();
+        user.setEmail("u@example.com");
+        user.setPassword("encoded");
+        user.setVerified(true);
+        user.setAccepted(true);
+
+        when(userRepository.findByEmail("u@example.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("pass", "encoded")).thenReturn(true);
+        when(jwtService.generateToken(user)).thenReturn("token");
+
+        String token = userService.login("u@example.com", "pass");
+        assertEquals("token", token);
+    }
+
+    @Test
+    void login_BlockedUser_Throws() {
+        User user = new User();
+        user.setEmail("u@example.com");
+        user.setVerified(true);
+        user.setAccepted(false);
+
+        when(userRepository.findByEmail("u@example.com")).thenReturn(Optional.of(user));
+
+        ResponseStatusException ex = assertThrows(ResponseStatusException.class,
+            () -> userService.login("u@example.com", "pass"));
+
+        assertEquals(HttpStatus.FORBIDDEN, ex.getStatus());
+    }
+
+    @Test
+    void verifyUser_Success() {
+        User user = new User();
+        user.setVerified(false);
+        user.setEmail("test@example.com");
+
+        when(jwtService.extractUsername("token")).thenReturn("test@example.com");
+        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+
+        userService.verifyUser("token");
+        assertTrue(user.isVerified());
+    }
+
+    @Test
+    void acceptUser_UserNotFound_Throws() {
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        ResponseStatusException ex = assertThrows(ResponseStatusException.class,
+            () -> userService.acceptUser(1L));
+
+        assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
+    }
+}

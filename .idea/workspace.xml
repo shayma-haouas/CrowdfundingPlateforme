@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5554cb70-b9dc-45bd-a8e3-1dbf7fe0ac64" name="Changes" comment="" />
+    <list default="true" id="5554cb70-b9dc-45bd-a8e3-1dbf7fe0ac64" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Springboot/backEnd/Backend/src/main/java/com/example/backend/Service/UserServiceImplTest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Springboot/backEnd/Backend/src/test/java/com/example/backend/services/ListToStringConverterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Springboot/backEnd/Backend/src/test/java/com/example/backend/services/UserActivityServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/backEnd/Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/backEnd/Backend/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
